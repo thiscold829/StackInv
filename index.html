@@ -3,290 +3,162 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>프롬프트 패드</title>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<title>Ocean Prompt Pad</title>
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
 <style>
-  :root {
-    --bg: #f5f5f0;
-    --white: #ffffff;
-    --border: #e0e0d8;
-    --border2: #d0d0c8;
-    --text: #1a1a1a;
-    --text-mid: #555550;
-    --text-dim: #999990;
-    --accent: #1a6ef5;
-    --accent-bg: #eef3ff;
-    --danger: #e53e3e;
-    --success: #2d8a5e;
-    --yellow: #e8a020;
-    --radius: 10px;
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Noto Sans KR', sans-serif;
-    font-size: 14px;
-    line-height: 1.6;
-    min-height: 100vh;
-    padding: 20px 16px 48px;
-  }
-  .topbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 20px;
-    padding-bottom: 14px;
-    border-bottom: 2px solid var(--border);
-  }
-  .logo {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--text-mid);
-    letter-spacing: 1.5px;
-  }
-  .logo span { color: var(--accent); }
-  .claude-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: var(--accent);
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    padding: 9px 16px;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 12px;
-    font-weight: 600;
-    cursor: pointer;
-    text-decoration: none;
-    letter-spacing: 0.5px;
-    transition: background 0.15s;
-    white-space: nowrap;
-  }
-  .claude-btn:hover { background: #1558d0; }
-  .section-label {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 10px;
-    font-weight: 600;
-    color: var(--text-dim);
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-bottom: 10px;
-  }
-  .cards-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 10px;
-    margin-bottom: 24px;
-  }
-  @media (max-width: 600px) {
-    .cards-grid { grid-template-columns: 1fr; }
-  }
-  .card {
-    background: var(--white);
-    border: 1.5px solid var(--border);
-    border-left-width: 4px;
-    border-radius: var(--radius);
-    overflow: hidden;
-    transition: box-shadow 0.15s;
-  }
-  .card:hover { box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
-  .card.flash { box-shadow: 0 0 0 2px var(--success); }
-  .card-row {
-    display: flex;
-    align-items: center;
-    padding: 13px 14px;
-    gap: 10px;
-  }
-  .card-title {
-    flex: 1;
-    font-weight: 500;
-    font-size: 14px;
-    color: var(--text);
-    line-height: 1.4;
-  }
-  .card-actions {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    flex-shrink: 0;
-  }
-  .add-btn {
-    background: var(--accent-bg);
-    color: var(--accent);
-    border: 1px solid #c5d8ff;
-    border-radius: 6px;
-    padding: 5px 11px;
-    font-size: 12px;
-    font-weight: 700;
-    cursor: pointer;
-    white-space: nowrap;
-    transition: background 0.12s;
-  }
-  .add-btn:hover { background: #dde9ff; }
-  .toggle-btn {
-    background: none;
-    border: 1px solid var(--border2);
-    border-radius: 6px;
-    padding: 5px 10px;
-    font-size: 11px;
-    color: var(--text-dim);
-    cursor: pointer;
-    white-space: nowrap;
-    font-family: 'Noto Sans KR', sans-serif;
-    transition: border-color 0.12s, color 0.12s;
-  }
-  .toggle-btn:hover { border-color: var(--text-mid); color: var(--text-mid); }
-  .card-content {
-    display: none;
-    padding: 0 14px 14px;
-    border-top: 1px solid var(--border);
-  }
-  .card-content.open { display: block; }
-  .card-content pre {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 11px;
-    color: var(--text-mid);
-    white-space: pre-wrap;
-    word-break: break-word;
-    line-height: 1.7;
-    padding-top: 12px;
-    max-height: 260px;
-    overflow-y: auto;
-  }
-  .composer {
-    background: var(--white);
-    border: 1.5px solid var(--border);
-    border-radius: var(--radius);
-    overflow: hidden;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
-  }
-  .composer-toolbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 14px;
-    border-bottom: 1px solid var(--border);
-    background: var(--bg);
-    gap: 8px;
-    flex-wrap: wrap;
-  }
-  .composer-left {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .char-count {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 11px;
-    color: var(--text-dim);
-  }
-  .btn-group { display: flex; gap: 7px; }
-  .btn {
-    font-family: 'Noto Sans KR', sans-serif;
-    font-size: 12px;
-    font-weight: 500;
-    padding: 7px 14px;
-    border-radius: 7px;
-    border: 1.5px solid;
-    cursor: pointer;
-    transition: background 0.12s, color 0.12s;
-    white-space: nowrap;
-  }
-  .btn-copy { background: var(--accent); border-color: var(--accent); color: #fff; }
-  .btn-copy:hover { background: #1558d0; border-color: #1558d0; }
-  .btn-clear { background: transparent; border-color: var(--border2); color: var(--text-mid); }
-  .btn-clear:hover { border-color: var(--danger); color: var(--danger); }
-  .composer-textarea {
-    width: 100%;
-    min-height: 180px;
-    background: transparent;
-    border: none;
-    color: var(--text);
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 12px;
-    line-height: 1.8;
-    padding: 14px;
-    resize: none;
-    outline: none;
-    overflow: hidden;
-  }
-  .toast {
-    position: fixed;
-    bottom: 24px;
-    left: 50%;
-    transform: translateX(-50%) translateY(16px);
-    background: #1a1a1a;
-    color: #fff;
-    font-size: 12px;
-    font-weight: 500;
-    padding: 10px 18px;
-    border-radius: 20px;
-    opacity: 0;
-    transition: opacity 0.18s, transform 0.18s;
-    pointer-events: none;
-    z-index: 999;
-    white-space: nowrap;
-    max-width: 90vw;
-    text-align: center;
-    font-family: 'Noto Sans KR', sans-serif;
-  }
-  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-  .toast.ok { background: var(--success); }
-  .toast.warn { background: var(--yellow); color: #fff; }
+    :root {
+        --ocean-light: #e0f7fa;
+        --ocean-mid: #b2ebf2;
+        --ocean-deep: #00838f;
+        --ocean-text: #004d40;
+        --glass-bg: rgba(255, 255, 255, 0.75);
+        --glass-border: rgba(255, 255, 255, 0.9);
+        --accent: #00bcd4;
+        --radius: 20px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+        background: linear-gradient(135deg, var(--ocean-light) 0%, #80deea 100%);
+        color: var(--ocean-text);
+        font-family: 'Pretendard', sans-serif;
+        min-height: 100vh; padding: 20px 15px;
+        display: flex; flex-direction: column; align-items: center;
+    }
+
+    .container { width: 100%; max-width: 600px; }
+
+    /* Header & AI Selector */
+    .top-section {
+        background: var(--glass-bg);
+        backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+        border: 1px solid var(--glass-border);
+        border-radius: var(--radius);
+        padding: 20px; margin-bottom: 25px;
+        box-shadow: 0 8px 32px rgba(0, 131, 143, 0.08);
+        display: flex; flex-direction: column; gap: 15px; align-items: center;
+    }
+    .logo { font-size: 22px; font-weight: 800; color: var(--ocean-deep); letter-spacing: -0.5px; }
+    
+    .ai-selector { display: flex; width: 100%; gap: 8px; background: rgba(255,255,255,0.6); padding: 6px; border-radius: 50px; }
+    .ai-selector label {
+        flex: 1; text-align: center; padding: 10px 0; border-radius: 50px; cursor: pointer;
+        font-size: 14px; font-weight: 700; color: #555; transition: all 0.2s;
+    }
+    .ai-selector input[type="radio"] { display: none; }
+    .ai-selector input[type="radio"]:checked + label {
+        background: var(--ocean-deep); color: #fff; box-shadow: 0 4px 10px rgba(0, 131, 143, 0.3);
+    }
+
+    /* 2x2 Cards Grid */
+    .cards-grid {
+        display: grid; 
+        grid-template-columns: 1fr 1fr; 
+        gap: 15px; 
+        margin-bottom: 30px;
+    }
+    
+    .card {
+        background: var(--glass-bg);
+        backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+        border: 1px solid var(--glass-border);
+        border-radius: var(--radius); overflow: hidden;
+        box-shadow: 0 6px 20px rgba(0, 131, 143, 0.08);
+        display: flex; flex-direction: column;
+        cursor: pointer; position: relative;
+        transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
+    }
+    .card:active { transform: scale(0.96); background: rgba(255, 255, 255, 0.9); }
+    
+    .card-body { padding: 30px 15px 20px; flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+    .card-icon { font-size: 28px; margin-bottom: 10px; }
+    .card-title { font-weight: 800; font-size: 16px; color: var(--ocean-deep); margin-bottom: 6px; line-height: 1.2; word-break: keep-all; }
+    .card-desc { font-size: 12px; color: #555; font-weight: 500; line-height: 1.4; word-break: keep-all; }
+    
+    /* 우상단 + 플로팅 버튼 */
+    .btn-toggle {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.8);
+        color: var(--ocean-deep);
+        border: 1px solid rgba(0, 188, 212, 0.2);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+        z-index: 10;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    }
+    .btn-toggle:active { transform: scale(0.85); background: var(--ocean-light); }
+
+    .card-content { display: none; padding: 0 15px 15px; border-top: 1px solid rgba(0,0,0,0.05); }
+    .card-content.open { display: block; cursor: default; }
+    .card-content pre {
+        font-family: 'Pretendard', monospace; font-size: 11px; color: #444;
+        white-space: pre-wrap; line-height: 1.6; padding-top: 12px; max-height: 250px; overflow-y: auto; text-align: left;
+    }
+
+    /* Toast */
+    .toast {
+        position: fixed; bottom: 40px; left: 50%; transform: translate(-50%, 20px);
+        background: var(--ocean-deep); color: #fff; padding: 14px 28px;
+        border-radius: 50px; font-weight: 700; font-size: 15px; width: max-content;
+        opacity: 0; pointer-events: none; transition: 0.3s; box-shadow: 0 10px 30px rgba(0,0,0,0.2); z-index: 999;
+    }
+    .toast.show { opacity: 1; transform: translate(-50%, 0); }
+    .toast.warn { background: #f57c00; }
 </style>
 </head>
 <body>
 
-<div class="topbar">
-  <div class="logo"><span>P</span>ROMPT PAD</div>
-  <a class="claude-btn"
-     href="https://claude.ai/chat/a65b65a8-6f10-4e1d-b52a-7a5ca9d1896e"
-     target="_blank">↗ Claude 열기</a>
-</div>
-
-<div class="section-label">프롬프트 카드</div>
-<div class="cards-grid" id="cardsGrid"></div>
-
-<div class="section-label">조합 패드</div>
-<div class="composer">
-  <div class="composer-toolbar">
-    <div class="composer-left">
-      <span class="section-label" style="margin:0">COMPOSE</span>
-      <span class="char-count" id="charCount">0자</span>
+<div class="container">
+    <div class="top-section">
+        <div class="logo">🌊 StackInv</div>
+        <div class="ai-selector">
+            <input type="radio" id="ai_claude" name="ai_engine" value="claude" checked>
+            <label for="ai_claude">✴️Claude</label>
+            
+            <input type="radio" id="ai_gemini" name="ai_engine" value="gemini">
+            <label for="ai_gemini">💠Gemini</label>
+            
+            <input type="radio" id="ai_gpt" name="ai_engine" value="gpt">
+            <label for="ai_gpt">🌀ChatGPT</label>
+        </div>
     </div>
-    <div class="btn-group">
-      <button class="btn btn-copy" onclick="copyAll()">전체 복사</button>
-      <button class="btn btn-clear" onclick="clearAll()">전체 삭제</button>
-    </div>
-  </div>
-  <textarea
-    class="composer-textarea"
-    id="composer"
-    placeholder="카드의 [+ 추가] 버튼을 누르면 여기에 쌓입니다. 직접 편집도 가능해요."
-    oninput="onInput(this)"
-  ></textarea>
+
+    <!-- 2x2 대형 카드 그리드 -->
+    <div class="cards-grid" id="cardsGrid"></div>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-// ============================================================
-// ✏️  프롬프트 목록 — 여기서 추가 / 수정 / 삭제 하세요
-//
-// 카드 하나 = { } 블록 하나, 블록 사이는 쉼표(,)로 구분
-// accent 색상: "#1a6ef5" 파랑(헤더) / "#e8a020" 주황(모드)
-// ============================================================
+// =========================================================================
+// 💡 여기서부터 비개발자도 쉽게 수정할 수 있는 설정 공간입니다!
+// =========================================================================
 
+// 🔗 1. AI 사이트 링크 설정
+const AI_URLS = {
+    claude: "https://claude.ai/chat/a65b65a8-6f10-4e1d-b52a-7a5ca9d1896e",
+    gemini: "https://gemini.google.com/app/b67577b0f11dd9b5?hl=ko",
+    gpt: "https://chatgpt.com/c/69fb28e6-3c34-8321-a7a0-ceef092af1de"
+};
+
+// 📝 2. 프롬프트 데이터 설정 (내용 절대 수정 금지)
 const PROMPTS = [
-
-  // ─── 카드 1 ───────────────────────────────────────────────
   {
-    title: "🔹 공통 헤더 (모든 모드 맨 위에 항상 붙임)",
-    accent: "#1a6ef5",
-    content: `너는 다음 역할의 융합체로 행동한다:
+    icon: "🗺️",
+    ui_title: "A. 전략 수립",
+    ui_desc: "1차 포트폴리오 설계 및<br>거시 진단",
+    content: `🔹A. 종합 전략 수립 (1차 포트폴리오 설계)
+너는 다음 역할의 융합체로 행동한다:
 - 글로벌 매크로 헤지펀드 수석 전략가 (브리지워터/시타델 수준의 거시 통찰)
 - 전재산을 운용하는 리스크 관리 책임자 (손실방어 최우선)
 - 행동재무학 기반 트레이딩 코치 (편향 차단)
@@ -318,14 +190,9 @@ const PROMPTS = [
 [금지]
 - 옵션 추천 금지
 - "분산하세요/공부하세요" 일반론 금지
-- 가짜 자신감 금지 (불확실성은 명시)`
-  },
+- 가짜 자신감 금지 (불확실성은 명시)
 
-  // ─── 카드 2 ───────────────────────────────────────────────
-  {
-    title: "🔸 A. 종합 전략 수립 (1차 포트폴리오 설계)",
-    accent: "#e8a020",
-    content: `[모드: 종합 전략 수립]
+[모드: 종합 전략 수립]
 
 [내 입력]
 - 총 운용 자본:
@@ -356,12 +223,46 @@ const PROMPTS = [
 
 시작하라.`
   },
-
-  // ─── 카드 3 ───────────────────────────────────────────────
   {
-    title: "🔸 B. 정기 시장 브리핑",
-    accent: "#e8a020",
-    content: `[모드: 정기 브리핑]
+    icon: "📡",
+    ui_title: "B. 정기 브리핑",
+    ui_desc: "시장 변화 및<br>보유 종목 영향 추적",
+    content: `🔹B. 정기 시장 브리핑
+너는 다음 역할의 융합체로 행동한다:
+- 글로벌 매크로 헤지펀드 수석 전략가 (브리지워터/시타델 수준의 거시 통찰)
+- 전재산을 운용하는 리스크 관리 책임자 (손실방어 최우선)
+- 행동재무학 기반 트레이딩 코치 (편향 차단)
+
+[운용자 프로필]
+- 거주: 한국, 한국어로 응답
+- 자금 성격: 전재산 → 손실방어 최우선
+- 리스크 성향: 균형형~공격형 (존버 가능, 변동성 감내)
+- 자산 범위: 미국주식 / 미국 ETF / 미국 레버리지ETF(2x~3x 가능) / 달러 환테크
+- 제외: 옵션, 한국주식, 크립토
+- 매매 스타일: 스윙(주 단위)~포지션(월/분기 단위) 위주, 가끔 단타. 매번 모니터링 불가
+- 특혜: 2026년 12월까지 미국주식 매매수수료 + 달러 환전수수료 전면 무료
+  → 회전매매·달러환 타이밍·리밸런싱 비용 부담 없음. 적극 활용해 우위로 전환할 것
+- 운용 목표: 2026년 최고 수익 + 큰 낙폭 회피
+
+[작동 원칙 - 모든 모드 공통]
+1. 정보 수집은 web_search 적극 활용. 출처 불명/추측 금지. 모르면 모른다고.
+2. 톤: 조건부 단정형 + 직진형.
+   ✅ "$X 이탈 시 손절, $Y 도달 시 분할매수, $Z 도달 시 1/3 익절"
+   ❌ "상황을 지켜보며 신중히…" 같은 양시론
+3. 산출물 항목은 너가 판단해 [거시분석 / 종목·ETF 추천 / 진입가·손절가·목표가 / 포트폴리오 비중 / 리스크 시나리오·헤지 / 시장심리·수급·차트신호] 중 필요한 것만. 제외한 항목은 "지금 불필요한 이유" 한 줄로 명시.
+4. 모든 응답에 [즉시 실행 액션 리스트]를 별도 섹션으로 반드시 포함 (오늘/이번 주 할 것).
+5. 손실방어 시나리오(-20%, -30% 급락) 시 대응책을 항상 준비.
+6. 한국 시간대(미국장 23:30~06:00 KST) 고려해 액션 타이밍 제시.
+7. 26년 수수료무료 특혜를 전략에 적극 반영 (달러환 타이밍, 리밸런싱, 회전매매).
+8. 한국어 마크다운. 핵심만. 일반론·면책문구 늘어놓기 금지.
+9. 사용자에게 도움 되는 정보가 부족하면 답을 만들어내지 말고 먼저 질문하라.
+
+[금지]
+- 옵션 추천 금지
+- "분산하세요/공부하세요" 일반론 금지
+- 가짜 자신감 금지 (불확실성은 명시)
+
+[모드: 정기 브리핑]
 
 [내 입력]
 - 직전 브리핑/전략수립 이후 경과 기간:
@@ -385,12 +286,46 @@ const PROMPTS = [
 
 시작하라.`
   },
-
-  // ─── 카드 4 ───────────────────────────────────────────────
   {
-    title: "🔸 C. 수시 의사결정 (계좌 첨부 + 즉시 판단)",
-    accent: "#e8a020",
-    content: `[모드: 수시 의사결정]
+    icon: "⚡",
+    ui_title: "C. 수시 의사결정",
+    ui_desc: "계좌 현황 기반<br>포지션 즉시 판단",
+    content: `🔹C. 수시 의사결정 (계좌 첨부 + 즉시 판단)
+너는 다음 역할의 융합체로 행동한다:
+- 글로벌 매크로 헤지펀드 수석 전략가 (브리지워터/시타델 수준의 거시 통찰)
+- 전재산을 운용하는 리스크 관리 책임자 (손실방어 최우선)
+- 행동재무학 기반 트레이딩 코치 (편향 차단)
+
+[운용자 프로필]
+- 거주: 한국, 한국어로 응답
+- 자금 성격: 전재산 → 손실방어 최우선
+- 리스크 성향: 균형형~공격형 (존버 가능, 변동성 감내)
+- 자산 범위: 미국주식 / 미국 ETF / 미국 레버리지ETF(2x~3x 가능) / 달러 환테크
+- 제외: 옵션, 한국주식, 크립토
+- 매매 스타일: 스윙(주 단위)~포지션(월/분기 단위) 위주, 가끔 단타. 매번 모니터링 불가
+- 특혜: 2026년 12월까지 미국주식 매매수수료 + 달러 환전수수료 전면 무료
+  → 회전매매·달러환 타이밍·리밸런싱 비용 부담 없음. 적극 활용해 우위로 전환할 것
+- 운용 목표: 2026년 최고 수익 + 큰 낙폭 회피
+
+[작동 원칙 - 모든 모드 공통]
+1. 정보 수집은 web_search 적극 활용. 출처 불명/추측 금지. 모르면 모른다고.
+2. 톤: 조건부 단정형 + 직진형.
+   ✅ "$X 이탈 시 손절, $Y 도달 시 분할매수, $Z 도달 시 1/3 익절"
+   ❌ "상황을 지켜보며 신중히…" 같은 양시론
+3. 산출물 항목은 너가 판단해 [거시분석 / 종목·ETF 추천 / 진입가·손절가·목표가 / 포트폴리오 비중 / 리스크 시나리오·헤지 / 시장심리·수급·차트신호] 중 필요한 것만. 제외한 항목은 "지금 불필요한 이유" 한 줄로 명시.
+4. 모든 응답에 [즉시 실행 액션 리스트]를 별도 섹션으로 반드시 포함 (오늘/이번 주 할 것).
+5. 손실방어 시나리오(-20%, -30% 급락) 시 대응책을 항상 준비.
+6. 한국 시간대(미국장 23:30~06:00 KST) 고려해 액션 타이밍 제시.
+7. 26년 수수료무료 특혜를 전략에 적극 반영 (달러환 타이밍, 리밸런싱, 회전매매).
+8. 한국어 마크다운. 핵심만. 일반론·면책문구 늘어놓기 금지.
+9. 사용자에게 도움 되는 정보가 부족하면 답을 만들어내지 말고 먼저 질문하라.
+
+[금지]
+- 옵션 추천 금지
+- "분산하세요/공부하세요" 일반론 금지
+- 가짜 자신감 금지 (불확실성은 명시)
+
+[모드: 수시 의사결정]
 
 [내 입력]
 - 현재 계좌 (첨부 또는 텍스트):
@@ -410,12 +345,46 @@ const PROMPTS = [
 
 시작하라.`
   },
-
-  // ─── 카드 5 ───────────────────────────────────────────────
   {
-    title: "🔸 D. 한번에 종합 요청 (큰 그림 + 즉시 액션)",
-    accent: "#e8a020",
-    content: `[모드: 종합 요청 - All-in-one]
+    icon: "💎",
+    ui_title: "D. 종합 요청",
+    ui_desc: "큰 그림 + 즉시 액션<br>올인원 통합",
+    content: `🔹D. 한번에 종합 요청 (큰 그림+즉시 액션 통합)
+너는 다음 역할의 융합체로 행동한다:
+- 글로벌 매크로 헤지펀드 수석 전략가 (브리지워터/시타델 수준의 거시 통찰)
+- 전재산을 운용하는 리스크 관리 책임자 (손실방어 최우선)
+- 행동재무학 기반 트레이딩 코치 (편향 차단)
+
+[운용자 프로필]
+- 거주: 한국, 한국어로 응답
+- 자금 성격: 전재산 → 손실방어 최우선
+- 리스크 성향: 균형형~공격형 (존버 가능, 변동성 감내)
+- 자산 범위: 미국주식 / 미국 ETF / 미국 레버리지ETF(2x~3x 가능) / 달러 환테크
+- 제외: 옵션, 한국주식, 크립토
+- 매매 스타일: 스윙(주 단위)~포지션(월/분기 단위) 위주, 가끔 단타. 매번 모니터링 불가
+- 특혜: 2026년 12월까지 미국주식 매매수수료 + 달러 환전수수료 전면 무료
+  → 회전매매·달러환 타이밍·리밸런싱 비용 부담 없음. 적극 활용해 우위로 전환할 것
+- 운용 목표: 2026년 최고 수익 + 큰 낙폭 회피
+
+[작동 원칙 - 모든 모드 공통]
+1. 정보 수집은 web_search 적극 활용. 출처 불명/추측 금지. 모르면 모른다고.
+2. 톤: 조건부 단정형 + 직진형.
+   ✅ "$X 이탈 시 손절, $Y 도달 시 분할매수, $Z 도달 시 1/3 익절"
+   ❌ "상황을 지켜보며 신중히…" 같은 양시론
+3. 산출물 항목은 너가 판단해 [거시분석 / 종목·ETF 추천 / 진입가·손절가·목표가 / 포트폴리오 비중 / 리스크 시나리오·헤지 / 시장심리·수급·차트신호] 중 필요한 것만. 제외한 항목은 "지금 불필요한 이유" 한 줄로 명시.
+4. 모든 응답에 [즉시 실행 액션 리스트]를 별도 섹션으로 반드시 포함 (오늘/이번 주 할 것).
+5. 손실방어 시나리오(-20%, -30% 급락) 시 대응책을 항상 준비.
+6. 한국 시간대(미국장 23:30~06:00 KST) 고려해 액션 타이밍 제시.
+7. 26년 수수료무료 특혜를 전략에 적극 반영 (달러환 타이밍, 리밸런싱, 회전매매).
+8. 한국어 마크다운. 핵심만. 일반론·면책문구 늘어놓기 일절 금지.
+9. 사용자에게 도움 되는 정보가 부족하면 답을 만들어내지 말고 먼저 질문하라.
+
+[금지]
+- 옵션 추천 금지
+- "분산하세요/공부하세요" 일반론 금지
+- 가짜 자신감 금지 (불확실성은 명시)
+
+[모드: 종합 요청 - All-in-one]
 
 [내 입력]
 - 총 운용 자본:
@@ -439,98 +408,78 @@ const PROMPTS = [
 
 시작하라.`
   }
-
-  // ─── 여기에 새 카드 추가 ─────────────────────────────────
-  // 위 마지막 } 뒤에 쉼표(,) 찍고 아래 형식 복붙:
-  //
-  // ,
-  // {
-  //   title: "카드 제목",
-  //   accent: "#e8a020",
-  //   content: `프롬프트 내용`
-  // }
-  // ─────────────────────────────────────────────────────────
-
 ];
 
-// ============================================================
-// 아래는 건드리지 마세요
-// ============================================================
+// =========================================================================
+// ⚠️ 코어 동작 스크립트
+// =========================================================================
 
 const grid = document.getElementById('cardsGrid');
-const composer = document.getElementById('composer');
-const charCount = document.getElementById('charCount');
 const toast = document.getElementById('toast');
 
+// 카드 렌더링
 PROMPTS.forEach((p) => {
-  const card = document.createElement('div');
-  card.className = 'card';
-  card.style.borderLeftColor = p.accent || '#ccc';
+    const card = document.createElement('div');
+    card.className = 'card';
+    
+    // 우상단 + 버튼을 최상단에 배치
+    card.innerHTML = `
+        <button class="btn-toggle">+</button>
+        <div class="card-body">
+            <div class="card-icon">${p.icon}</div>
+            <div class="card-title">${p.ui_title}</div>
+            <div class="card-desc">${p.ui_desc}</div>
+        </div>
+        <div class="card-content">
+            <pre>${p.content.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</pre>
+        </div>
+    `;
 
-  card.innerHTML = `
-    <div class="card-row">
-      <div class="card-title">${p.title}</div>
-      <div class="card-actions">
-        <button class="toggle-btn">내용 보기</button>
-        <button class="add-btn">+ 추가</button>
-      </div>
-    </div>
-    <div class="card-content">
-      <pre>${escHtml(p.content)}</pre>
-    </div>
-  `;
+    const toggleBtn = card.querySelector('.btn-toggle');
+    const contentEl = card.querySelector('.card-content');
 
-  const toggleBtn = card.querySelector('.toggle-btn');
-  const contentEl = card.querySelector('.card-content');
-  const addBtn = card.querySelector('.add-btn');
+    // 우상단 "+" 버튼 클릭 시 펼치기 (복사 방지)
+    toggleBtn.addEventListener('click', (e) => {
+        e.stopPropagation(); // 카드 전체 클릭 이벤트(복사/이동) 방지
+        const isOpen = contentEl.classList.toggle('open');
+        toggleBtn.textContent = isOpen ? '−' : '+'; // 열리면 마이너스 기호로 변경
+    });
 
-  toggleBtn.addEventListener('click', () => {
-    const open = contentEl.classList.toggle('open');
-    toggleBtn.textContent = open ? '내용 닫기' : '내용 보기';
-  });
+    // 프리뷰(내용보기) 영역 클릭 시 (복사 방지)
+    contentEl.addEventListener('click', (e) => {
+        e.stopPropagation();
+    });
 
-  addBtn.addEventListener('click', () => {
-    const sep = composer.value.trim() ? '\n\n' + '─'.repeat(44) + '\n\n' : '';
-    composer.value += sep + p.content;
-    autoResize(composer);
-    updateCount();
-    card.classList.add('flash');
-    setTimeout(() => card.classList.remove('flash'), 900);
-    showToast('패드에 추가됐습니다', 'ok');
-  });
+    // 카드 전체(버튼 제외) 클릭 시 복사 & AI 자동 이동
+    card.addEventListener('click', async () => {
+        try {
+            await navigator.clipboard.writeText(p.content);
+            showToast('✅ 복사 완료! AI로 이동합니다...');
+            
+            // 라디오 버튼으로 선택한 AI 앱 주소 가져오기
+            const selectedEngine = document.querySelector('input[name="ai_engine"]:checked').value;
+            const targetUrl = AI_URLS[selectedEngine];
+            
+            // 1초 후 앱/웹 자동 실행
+            setTimeout(() => {
+                window.open(targetUrl, '_blank');
+            }, 1000);
+            
+        } catch (err) {
+            showToast('클립보드 복사에 실패했습니다.', 'warn');
+        }
+    });
 
-  grid.appendChild(card);
+    grid.appendChild(card);
 });
 
-function escHtml(s) {
-  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-}
-function autoResize(el) {
-  el.style.height = 'auto';
-  el.style.height = Math.max(180, el.scrollHeight) + 'px';
-}
-function onInput(el) { autoResize(el); updateCount(); }
-function updateCount() {
-  charCount.textContent = composer.value.length.toLocaleString() + '자';
-}
-function copyAll() {
-  if (!composer.value.trim()) { showToast('패드가 비어 있습니다', 'warn'); return; }
-  navigator.clipboard.writeText(composer.value).then(() => {
-    showToast('복사 완료 — Claude 창에 붙여넣기 하세요');
-  });
-}
-function clearAll() {
-  composer.value = '';
-  composer.style.height = '180px';
-  updateCount();
-  showToast('패드를 지웠습니다');
-}
+// 알림창 띄우기 함수
 let toastTimer;
 function showToast(msg, type = '') {
-  toast.textContent = msg;
-  toast.className = 'toast show' + (type ? ' ' + type : '');
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => { toast.className = 'toast'; }, 2200);
+    toast.textContent = msg;
+    toast.className = 'toast show' + (type ? ' ' + type : '');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => { toast.className = 'toast'; }, 2000);
 }
 </script>
 </body>
