@@ -329,12 +329,6 @@ textarea.inp{height:180px}
   </div>
 </div>
 
-<!-- SYNC -->
-<form id="syncForm" method="POST" target="syncFrame" style="display:none">
-  <input type="hidden" name="payload" id="syncPayload"/>
-</form>
-<iframe name="syncFrame" id="syncFrame" style="display:none" onload="onFrame()"></iframe>
-
 <div id="toast"></div>
 
 <script>
@@ -343,8 +337,6 @@ textarea.inp{height:180px}
 ════════════════════════════════ */
 let D = null;
 let HIST = [];
-let pendingCb = null;
-let frameReady = false;
 let curTab = 0;
 
 /* ════════════════════════════════
@@ -424,22 +416,25 @@ async function apiGet(params) {
 }
 
 /* ════════════════════════════════
-   API — POST (hidden iframe, no CORS issue)
+   API — POST (fetch no-cors: GitHub→Apps Script CORS 우회)
+   response는 opaque(읽기 불가)이나 Apps Script는 정상 수신·처리함
+   POST 후 GET re-fetch로 결과 확인 및 UI 갱신
 ════════════════════════════════ */
-function apiPost(payload, cb) {
-  if (typeof CONFIG === 'undefined' || !CONFIG.API_URL) { cb?.(); return; }
-  pendingCb = cb || null;
-  document.getElementById('syncPayload').value = JSON.stringify(payload);
-  document.getElementById('syncForm').action = CONFIG.API_URL;
-  document.getElementById('syncForm').submit();
+async function apiPost(payload) {
+  if (typeof CONFIG === 'undefined' || !CONFIG.API_URL) return false;
   dot('saving');
-}
-
-function onFrame() {
-  if (!frameReady) { frameReady = true; return; } // skip initial load
-  dot('saved');
-  if (pendingCb) { const f = pendingCb; pendingCb = null; f(); }
-  setTimeout(() => dot('idle'), 3000);
+  try {
+    await fetch(CONFIG.API_URL, {
+      method: 'POST',
+      mode: 'no-cors',          // CORS 우회 — opaque response 감수
+      body: JSON.stringify(payload)
+    });
+    return true;
+  } catch(e) {
+    console.warn('POST fail', e);
+    dot('idle');
+    return false;
+  }
 }
 
 function dot(s) {
@@ -530,7 +525,7 @@ function cv(s) {
 /* ════════════════════════════════
    APPLY INPUT
 ════════════════════════════════ */
-function applyInput() {
+async function applyInput() {
   const raw = document.getElementById('txtInput').value.trim();
   if (!raw) { toast('텍스트를 붙여넣으세요'); return; }
 
@@ -547,35 +542,40 @@ function applyInput() {
     concl:   D.conclusion || ''
   });
 
-  // raw_text: encodeURIComponent to protect newlines in JSON field
-  const payload = {
+  toast('☁️ 저장 중...');
+  await apiPost({
     action:       'upsert',
     id:           D.dateId,
     display_date: D.displayDate,
     summary_json: summary,
     full_json:    JSON.stringify(D),
     raw_text:     encodeURIComponent(raw)
-  };
-
-  toast('☁️ 저장 중...');
-  apiPost(payload, async () => {
-    toast('✅ DB 저장 완료');
-    const res = await apiGet({action:'list'});
-    if (res?.ok) HIST = res.data;
-    checkToday();
   });
+
+  // Apps Script 처리 대기 후 목록 갱신
+  await wait(1500);
+  dot('saved');
+  toast('✅ DB 저장 완료');
+  const res = await apiGet({action:'list'});
+  if (res?.ok) HIST = res.data;
+  checkToday();
+  setTimeout(() => dot('idle'), 3000);
 }
 
-function manualSync() {
+async function manualSync() {
   if (!D) { toast('데이터 없음'); return; }
   const raw = document.getElementById('txtInput').value.trim();
   if (!raw) { toast('원문 없음 — 먼저 업데이트 하세요'); return; }
   toast('☁️ 수동 동기화 중...');
-  apiPost({
+  await apiPost({
     action:'upsert', id:D.dateId, display_date:D.displayDate,
     summary_json: JSON.stringify({total:D.account?.['총평가']||'',ret:D.account?.['수익률 (누적)']||''}),
     full_json: JSON.stringify(D), raw_text: encodeURIComponent(raw)
-  }, () => toast('✅ 동기화 완료'));
+  });
+  await wait(1500);
+  dot('saved');
+  toast('✅ 동기화 완료');
+  setTimeout(() => dot('idle'), 3000);
 }
 
 /* ════════════════════════════════
@@ -638,14 +638,20 @@ async function loadRecord(id, showMsg) {
   } catch(e) { if(showMsg) toast('데이터 오류'); }
 }
 
-function deleteRecord(id) {
+async function deleteRecord(id) {
   if (!confirm(`[${id}] 기록을 삭제할까요?`)) return;
-  apiPost({action:'delete', id}, () => {
-    HIST = HIST.filter(h => h.id !== id);
-    renderHistList();
-    toast('🗑 삭제됨');
-    if (D?.dateId === id) { D = null; localStorage.removeItem('inv_data'); renderAll(); }
-  });
+  toast('🗑 삭제 중...');
+  await apiPost({action:'delete', id});
+  await wait(1500);
+  dot('saved');
+  // 목록 갱신
+  const res = await apiGet({action:'list'});
+  if (res?.ok) HIST = res.data;
+  renderHistList();
+  toast('🗑 삭제됨');
+  if (D?.dateId === id) { D = null; localStorage.removeItem('inv_data'); renderAll(); }
+  checkToday();
+  setTimeout(() => dot('idle'), 3000);
 }
 
 /* ════════════════════════════════
@@ -858,6 +864,8 @@ function rsiC(v) { return v>=75?'#dc2626':v>=60?'#d97706':v>=45?'#16a34a':'#2563
 function emptyHtml(icon, t, s) {
   return `<div class="empty"><span class="ms">${icon}</span><div class="empty-t">${t}</div><div class="empty-s">${s}</div></div>`;
 }
+
+function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
 
 let _tt = null;
 function toast(msg) {
