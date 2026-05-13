@@ -9,7 +9,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
 <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css"/>
 <style>
-/* ── TOKENS ── */
 :root{
   --bg:#f0f9ff; --white:#fff;
   --navy:#0c1a2e; --navy2:#1e3a5f;
@@ -23,11 +22,9 @@
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html,body{font-family:var(--fb);background:#dbeafe;color:var(--text);height:100%;overflow:hidden;-webkit-font-smoothing:antialiased}
 
-/* ── SHELL ── */
 .app{max-width:480px;width:100%;height:100dvh;margin:0 auto;display:flex;flex-direction:column;background:var(--bg);position:relative;overflow:hidden}
 .ms{font-family:'Material Symbols Outlined';font-weight:normal;font-style:normal;display:inline-block;line-height:1;text-transform:none;letter-spacing:normal;white-space:nowrap;-webkit-font-smoothing:antialiased}
 
-/* ── HEADER ── */
 .hdr{background:var(--navy);padding:12px 16px 10px;flex-shrink:0;z-index:10}
 .hdr-r1{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
 .brand{font-family:var(--fn);font-weight:900;font-size:18px;letter-spacing:-.04em;color:#fff;display:flex;align-items:center;gap:6px}
@@ -49,36 +46,30 @@ html,body{font-family:var(--fb);background:#dbeafe;color:var(--text);height:100%
 .sync-dot.saved{background:var(--buy)}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
 
-/* ── ALERT BAR ── */
 .alert-bar{display:none;background:#fff7ed;border-bottom:1.5px solid #fed7aa;padding:11px 16px;flex-shrink:0;cursor:pointer;align-items:center;gap:9px}
 .alert-bar.on{display:flex}
 .alert-bar .ms{color:var(--warn);font-size:18px;flex-shrink:0}
 .alert-txt{flex:1;font-size:12px;font-weight:700;color:#92400e}
 .alert-cta{font-size:11px;font-weight:800;color:var(--warn);border:1px solid #fde68a;background:#fef3c7;border-radius:6px;padding:3px 9px;white-space:nowrap}
 
-/* ── CONTENT ── */
 .content{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
 .pane{display:none;padding:14px 14px 84px}
 .pane.on{display:block}
 
-/* ── TABBAR ── */
 .tabs{position:absolute;bottom:0;left:0;right:0;background:var(--white);border-top:1px solid var(--border2);display:flex;padding-bottom:max(env(safe-area-inset-bottom),4px);z-index:20;box-shadow:0 -2px 14px rgba(0,0,0,.07)}
 .tab{flex:1;display:flex;flex-direction:column;align-items:center;padding:9px 4px 5px;background:none;border:none;cursor:pointer;color:var(--sub-lt);font-family:var(--fb);font-weight:700;font-size:10px;gap:3px;min-height:56px;transition:.15s;letter-spacing:.01em}
 .tab .ms{font-size:22px}
 .tab.on{color:var(--sky)}
 .tab.on .ms{font-variation-settings:'FILL' 1}
 
-/* ── SECTION LABEL ── */
 .sl{font-size:10px;font-weight:800;letter-spacing:.08em;color:var(--sub);text-transform:uppercase;margin:16px 0 8px}
 .sl:first-child{margin-top:0}
 
-/* ── CONCLUSION ── */
 .concl{background:var(--navy);border-radius:16px;padding:14px 16px;margin-bottom:10px}
 .concl-lbl{font-size:9px;font-weight:800;letter-spacing:.1em;color:var(--sky-lt);margin-bottom:5px}
 .concl-txt{font-size:13px;line-height:1.6;color:rgba(255,255,255,.9)}
 .concl-badge{display:inline-flex;align-items:center;gap:4px;margin-top:8px;background:rgba(56,189,248,.12);border:1px solid rgba(56,189,248,.3);color:var(--sky-lt);border-radius:20px;padding:3px 10px;font-size:10px;font-weight:800}
 
-/* ── EVENT ── */
 .evt{background:var(--white);border:1px solid;border-left:4px solid;border-radius:12px;padding:11px 14px;display:flex;align-items:center;gap:11px;margin-bottom:7px;min-height:52px}
 .evt.today{border-color:#fecaca;border-left-color:var(--stop);background:#fff8f8}
 .evt.near{border-color:#fde68a;border-left-color:var(--warn);background:#fffbeb}
@@ -90,7 +81,6 @@ html,body{font-family:var(--fb);background:#dbeafe;color:var(--text);height:100%
 .evt-time{font-size:10px;color:var(--sub)}
 .evt-name{font-size:13px;font-weight:700;margin-top:2px}
 
-/* ── ORDER ── */
 .og{font-size:10px;font-weight:800;padding:4px 10px;border-radius:6px;display:inline-flex;align-items:center;gap:4px;margin-bottom:6px;margin-top:4px}
 .og .ms{font-size:13px}
 .og.buy{background:#dcfce7;color:var(--buy)}
@@ -110,12 +100,10 @@ html,body{font-family:var(--fb);background:#dbeafe;color:var(--text);height:100%
 .oc-price{font-family:var(--fn);font-weight:800;font-size:14px;text-align:right}
 .oc-qty{font-size:10px;color:var(--sub);text-align:right;margin-top:1px}
 
-/* ── BEHAVIOR WARN ── */
 .bwarn{background:#fffbeb;border:1px solid #fde68a;border-left:4px solid var(--warn);border-radius:12px;padding:12px 14px;margin-top:8px}
 .bwarn-lbl{font-size:9px;font-weight:800;color:var(--warn);letter-spacing:.08em;margin-bottom:4px}
 .bwarn-txt{font-size:12px;color:#92400e;line-height:1.55}
 
-/* ── STOCK CARDS ── */
 .hgrid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
 .hcard{background:var(--white);border:1px solid var(--border2);border-radius:14px;padding:13px 13px 11px;position:relative;overflow:hidden}
 .hcard::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
@@ -136,7 +124,6 @@ html,body{font-family:var(--fb);background:#dbeafe;color:var(--text);height:100%
 .hc-chg.dn{background:#fee2e2;color:var(--stop)}
 .hc-qty{font-size:10px;color:var(--sub-lt);margin-top:3px}
 
-/* ── DELTA TABLE ── */
 .dtable{background:var(--white);border-radius:13px;border:1px solid var(--border2);overflow:hidden}
 .drow{display:flex;align-items:center;padding:11px 14px;border-bottom:1px solid var(--border2);gap:10px}
 .drow:last-child{border-bottom:none}
@@ -146,20 +133,17 @@ html,body{font-family:var(--fb);background:#dbeafe;color:var(--text);height:100%
 .d-delta.up{background:#dcfce7;color:var(--buy)}
 .d-delta.dn{background:#fee2e2;color:var(--stop)}
 
-/* ── USD CARD ── */
 .usd-card{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 100%);border-radius:14px;padding:14px 16px;margin-top:9px;display:flex;justify-content:space-between;align-items:center}
 .usd-lbl{font-size:10px;font-weight:700;color:rgba(255,255,255,.5);letter-spacing:.05em}
 .usd-val{font-family:var(--fn);font-weight:900;font-size:20px;color:#fff;margin-top:3px}
 .usd-krw{font-size:11px;color:var(--sky-lt);margin-top:2px}
 .usd-r{text-align:right;font-size:11px;color:rgba(255,255,255,.5)}
 
-/* ── KPI GRID ── */
 .kgrid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
 .kcard{background:var(--white);border-radius:14px;border:1px solid var(--border2);padding:13px}
 .k-lbl{font-size:9px;font-weight:800;color:var(--sub);text-transform:uppercase;letter-spacing:.06em}
 .k-val{font-family:var(--fn);font-weight:900;font-size:17px;margin-top:5px;line-height:1.1}
 
-/* ── TECH ROW ── */
 .trow{background:var(--white);border:1px solid var(--border2);border-radius:13px;padding:12px 14px;display:flex;align-items:center;gap:12px;margin-bottom:8px}
 .t-tick{font-family:var(--fn);font-weight:900;font-size:13px;width:40px;flex-shrink:0}
 .t-rsi{position:relative;width:46px;height:46px;flex-shrink:0}
@@ -169,12 +153,10 @@ html,body{font-family:var(--fb);background:#dbeafe;color:var(--text);height:100%
 .t-50{font-size:10px;color:var(--sub);margin-top:2px}
 .t-warn{font-size:10px;font-weight:800;color:var(--stop);margin-top:3px}
 
-/* ── PILLS ── */
 .pills{display:flex;flex-wrap:wrap;gap:6px}
 .pill{background:var(--white);border:1px solid var(--border2);border-radius:8px;padding:6px 12px;font-size:11px;font-weight:600;line-height:1.45}
 .pill.w{background:#fffbeb;border-color:#fde68a}
 
-/* ── DDAY ── */
 .ddrow{background:var(--white);border:1px solid var(--border2);border-radius:13px;padding:12px 14px;display:flex;align-items:center;gap:12px;margin-bottom:8px;min-height:56px}
 .dd-badge{font-family:var(--fn);font-weight:900;font-size:12px;background:var(--navy);color:#fff;border-radius:8px;padding:5px 9px;min-width:44px;text-align:center;flex-shrink:0;line-height:1.2}
 .dd-badge.today{background:var(--stop)}
@@ -183,7 +165,6 @@ html,body{font-family:var(--fb);background:#dbeafe;color:var(--text);height:100%
 .dd-event{font-size:13px;font-weight:700}
 .dd-time{font-size:10px;color:var(--sub);margin-top:2px}
 
-/* ── RISK ── */
 .rcard{background:var(--white);border:1px solid var(--border2);border-left:4px solid;border-radius:13px;padding:12px 14px;margin-bottom:8px}
 .rcard.low{border-left-color:var(--sub-lt)}
 .rcard.mid{border-left-color:var(--warn)}
@@ -192,14 +173,12 @@ html,body{font-family:var(--fb);background:#dbeafe;color:var(--text);height:100%
 .r-trig{font-size:11px;color:var(--sub);margin-top:3px}
 .r-act{font-size:11px;color:var(--sky);font-weight:600;margin-top:4px}
 
-/* ── CANDIDATE ── */
 .ccard{background:var(--white);border:1px solid var(--border2);border-left:4px solid var(--sky);border-radius:13px;padding:12px 14px;margin-bottom:8px}
 .c-top{display:flex;justify-content:space-between;align-items:center}
 .c-ticker{font-family:var(--fn);font-weight:900;font-size:14px}
 .c-entry{font-size:11px;font-weight:700;color:var(--buy)}
 .c-reason{font-size:11px;color:var(--sub);margin-top:4px;line-height:1.45}
 
-/* ── TAX ── */
 .taxcard{background:var(--white);border:1px solid var(--border2);border-radius:13px;padding:14px}
 .tax-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
 .tax-lbl{font-size:12px;font-weight:700}
@@ -208,10 +187,8 @@ html,body{font-family:var(--fb);background:#dbeafe;color:var(--text);height:100%
 .tax-fill{height:100%;background:linear-gradient(90deg,var(--sky),var(--sky-lt));border-radius:99px;transition:width 1.2s ease;width:0%}
 .tax-sub{font-size:11px;color:var(--sub)}
 
-/* ── CARD ── */
 .card{background:var(--white);border:1px solid var(--border2);border-radius:13px;padding:12px 14px;margin-bottom:8px;font-size:12px;line-height:1.55;color:var(--text2)}
 
-/* ── OVERLAYS ── */
 .ov{position:fixed;inset:0;background:rgba(0,0,0,.5);backdrop-filter:blur(6px);z-index:200;display:none;align-items:flex-end;justify-content:center}
 .ov.on{display:flex}
 .sheet{background:var(--white);width:100%;max-width:480px;border-radius:24px 24px 0 0;padding:20px 18px;max-height:88dvh;overflow-y:auto;animation:su .35s cubic-bezier(.16,1,.3,1)}
@@ -226,7 +203,6 @@ textarea.inp{height:180px}
 .btn-p:active{transform:scale(.98)}
 .btn-g{width:100%;padding:12px;background:none;border:none;color:var(--sub);font-family:var(--fb);font-size:13px;font-weight:700;cursor:pointer;margin-top:6px;min-height:44px}
 
-/* ── HISTORY ── */
 .hi{display:flex;align-items:center;gap:12px;padding:13px 14px;border-radius:13px;border:1px solid var(--border2);background:var(--white);margin-bottom:8px;cursor:pointer;transition:.15s;min-height:56px}
 .hi:active{background:var(--sky-pale);transform:scale(.99)}
 .hi-date{font-family:var(--fn);font-weight:900;font-size:14px;flex:1}
@@ -237,7 +213,6 @@ textarea.inp{height:180px}
 .hi-del:active{background:#fecaca}
 .hi-del .ms{font-size:18px}
 
-/* ── EMPTY / LOADING / TOAST ── */
 .empty{display:flex;flex-direction:column;align-items:center;padding:60px 20px;text-align:center}
 .empty .ms{font-size:44px;color:#cbd5e1;margin-bottom:10px}
 .empty-t{font-weight:700;font-size:15px;color:var(--sub)}
@@ -248,7 +223,6 @@ textarea.inp{height:180px}
 #toast{position:fixed;top:16px;left:50%;transform:translateX(-50%);background:rgba(12,26,46,.92);color:#fff;padding:9px 22px;border-radius:99px;font-size:12px;font-weight:700;opacity:0;transition:.3s;z-index:999;pointer-events:none;white-space:nowrap;border:1px solid rgba(255,255,255,.12)}
 #toast.on{opacity:1;transform:translateX(-50%) translateY(8px)}
 
-/* ── PC ── */
 @media(min-width:480px){
   body{display:flex;align-items:center;justify-content:center;height:100vh}
   .app{box-shadow:0 0 60px rgba(0,0,0,.15);border-radius:24px}
@@ -258,14 +232,13 @@ textarea.inp{height:180px}
 <body>
 <div class="app">
 
-  <!-- HEADER -->
   <header class="hdr">
     <div class="hdr-r1">
       <div class="brand"><span class="ms">anchor</span>StackInv</div>
       <div class="hbtns">
         <span class="sync-dot" id="syncDot"></span>
         <button class="hbtn" onclick="openHistory()"><span class="ms">history</span></button>
-        <button class="hbtn" onclick="manualSync()" title="수동 동기화"><span class="ms">cloud_sync</span></button>
+        <button class="hbtn" onclick="dbUpload()"><span class="ms">cloud_upload</span>DB 업로드</button>
         <button class="hbtn acc" onclick="openInput()"><span class="ms">upload_file</span>업데이트</button>
       </div>
     </div>
@@ -279,14 +252,12 @@ textarea.inp{height:180px}
     </div>
   </header>
 
-  <!-- ALERT BAR -->
   <div class="alert-bar" id="alertBar" onclick="openInput()">
     <span class="ms">notification_important</span>
     <div class="alert-txt">오늘 브리핑이 아직 없습니다.</div>
     <div class="alert-cta">지금 입력 →</div>
   </div>
 
-  <!-- CONTENT -->
   <div class="content" id="content">
     <div class="pane on" id="p0"></div>
     <div class="pane" id="p1"></div>
@@ -294,7 +265,6 @@ textarea.inp{height:180px}
     <div class="pane" id="p3"></div>
   </div>
 
-  <!-- TABBAR -->
   <nav class="tabs">
     <button class="tab on"  onclick="setTab(0)"><span class="ms">checklist</span>오늘 할 일</button>
     <button class="tab"     onclick="setTab(1)"><span class="ms">bar_chart</span>현황</button>
@@ -332,61 +302,60 @@ textarea.inp{height:180px}
 <div id="toast"></div>
 
 <script>
-/* ════════════════════════════════
+/* ═══════════════════════════
    STATE
-════════════════════════════════ */
+═══════════════════════════ */
 let D = null;
 let HIST = [];
 let curTab = 0;
 
-/* ════════════════════════════════
+/* ═══════════════════════════
    INIT
-════════════════════════════════ */
+═══════════════════════════ */
 window.addEventListener('DOMContentLoaded', async () => {
-  // overlay backdrop close
   ['ovInput','ovHist'].forEach(id => {
     document.getElementById(id).addEventListener('click', function(e){
-      if(e.target === this) this.classList.remove('on');
+      if (e.target === this) this.classList.remove('on');
     });
   });
 
-  const hasApi = typeof CONFIG !== 'undefined' && CONFIG?.API_URL;
-
-  if (!hasApi) {
-    setMeta('로컬 모드 (config.js 미연동)');
-    loadLocal();
-    checkToday();
+  if (typeof CONFIG === 'undefined' || !CONFIG?.API_URL) {
+    setMeta('⚠️ config.js 미설정 — API_URL 필요');
+    renderEmpty();
     return;
   }
 
   setMeta('DB 연결 중...');
-  const res = await apiGet({action:'list'});
-  if (res?.ok && res.data?.length) {
-    HIST = res.data; // newest first
+  const res = await apiGet({ action: 'list' });
+
+  if (!res) {
+    setMeta('DB 연결 실패 — API를 확인하세요');
+    renderEmpty();
+  } else if (res.ok && res.data?.length) {
+    HIST = res.data;
     await loadRecord(HIST[0].id, false);
   } else {
-    loadLocal();
+    setMeta('데이터 없음 — 업데이트 버튼으로 시작');
   }
   checkToday();
 });
 
-function loadLocal() {
-  const s = localStorage.getItem('inv_data');
-  if (s) try { D = JSON.parse(s); renderAll(); } catch(e) {}
-  else setMeta('데이터 없음 — 업데이트 버튼으로 시작');
+function renderEmpty() {
+  ['p0','p1','p2','p3'].forEach(id => {
+    document.getElementById(id).innerHTML = emptyHtml('anchor', '데이터 없음', '업데이트 버튼을 눌러<br>브리핑 텍스트를 붙여넣으세요');
+  });
 }
 
-/* ════════════════════════════════
+/* ═══════════════════════════
    DATE UTILS
-════════════════════════════════ */
+═══════════════════════════ */
 function todayId() {
   const n = new Date();
   return `${n.getFullYear()}-${pad(n.getMonth()+1)}-${pad(n.getDate())}`;
 }
-function pad(n){ return String(n).padStart(2,'0'); }
+function pad(n) { return String(n).padStart(2, '0'); }
 
 function extractId(raw) {
-  // "(5/13 KST" 또는 "5/13 KST" 패턴
   const m = raw.match(/[（(]?\s*(\d{1,2})\/(\d{1,2})\s*KST/);
   if (m) return `${new Date().getFullYear()}-${pad(+m[1])}-${pad(+m[2])}`;
   return todayId();
@@ -403,48 +372,77 @@ function checkToday() {
   document.getElementById('alertBar').classList.toggle('on', !has);
 }
 
-/* ════════════════════════════════
-   API — GET (fetch, CORS OK)
-════════════════════════════════ */
+/* ═══════════════════════════
+   API — GET
+═══════════════════════════ */
 async function apiGet(params) {
-  if (typeof CONFIG === 'undefined') return null;
   try {
     const url = CONFIG.API_URL + '?' + new URLSearchParams(params);
-    const res = await fetch(url, {redirect:'follow'});
+    const res = await fetch(url, { redirect: 'follow' });
     return await res.json();
   } catch(e) { console.warn('GET fail', e); return null; }
 }
 
-/* ════════════════════════════════
-   API — POST (fetch no-cors: GitHub→Apps Script CORS 우회)
-   response는 opaque(읽기 불가)이나 Apps Script는 정상 수신·처리함
-   POST 후 GET re-fetch로 결과 확인 및 UI 갱신
-════════════════════════════════ */
+/* ═══════════════════════════
+   API — POST
+   Content-Type: text/plain → simple request (preflight 없음)
+   cors 모드로 실제 응답 수신
+═══════════════════════════ */
 async function apiPost(payload) {
-  if (typeof CONFIG === 'undefined' || !CONFIG.API_URL) return false;
-  dot('saving');
   try {
-    await fetch(CONFIG.API_URL, {
+    const res = await fetch(CONFIG.API_URL, {
       method: 'POST',
-      mode: 'no-cors',          // CORS 우회 — opaque response 감수
-      body: JSON.stringify(payload)
+      headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
+      body: JSON.stringify(payload),
+      redirect: 'follow'
     });
-    return true;
-  } catch(e) {
-    console.warn('POST fail', e);
-    dot('idle');
-    return false;
-  }
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    return await res.json();
+  } catch(e) { console.warn('POST fail', e); return null; }
 }
 
 function dot(s) {
   const el = document.getElementById('syncDot');
-  el.className = 'sync-dot' + (s==='saving'?' saving': s==='saved'?' saved':'');
+  el.className = 'sync-dot' + (s === 'saving' ? ' saving' : s === 'saved' ? ' saved' : '');
 }
 
-/* ════════════════════════════════
+/* ═══════════════════════════
+   SYNC — 현재 D를 DB에 업로드
+═══════════════════════════ */
+async function syncToDb() {
+  if (!D) return null;
+  dot('saving');
+  const summary = JSON.stringify({
+    total:  D.account?.['총평가'] || '',
+    ret:    D.account?.['수익률 (누적)'] || '',
+    cash:   D.account?.['USD 현금'] || '',
+    orders: D.orders?.length || 0,
+    concl:  D.conclusion || ''
+  });
+  const result = await apiPost({
+    action:       'upsert',
+    id:           D.dateId,
+    display_date: D.displayDate,
+    summary_json: summary,
+    full_json:    JSON.stringify(D),
+    raw_text:     encodeURIComponent(D.raw || '')
+  });
+  if (result?.ok) { dot('saved'); setTimeout(() => dot('idle'), 3000); }
+  else dot('idle');
+  return result;
+}
+
+/* "DB 업로드" 버튼 핸들러 */
+async function dbUpload() {
+  if (!D) { toast('데이터 없음'); return; }
+  toast('☁️ DB 업로드 중...');
+  const result = await syncToDb();
+  toast(result?.ok ? '✅ DB 업로드 완료' : '⚠️ 업로드 실패 — API 연결을 확인하세요');
+}
+
+/* ═══════════════════════════
    PARSE
-════════════════════════════════ */
+═══════════════════════════ */
 function parseInv(raw) {
   const d = { raw };
   d.dateId      = extractId(raw);
@@ -486,7 +484,6 @@ function tbl(lines) {
   const hdrs = rows[0].split('|').map(cv).filter(Boolean);
   return rows.slice(2).map(row => {
     const vals = row.split('|').map(cv);
-    // remove leading/trailing empty from split
     while (vals.length && !vals[0]) vals.shift();
     const obj = {};
     hdrs.forEach((h, i) => { obj[h] = vals[i] !== undefined ? vals[i] : ''; });
@@ -522,65 +519,29 @@ function cv(s) {
   return String(s).replace(/\*\*/g,'').replace(/⚠️/g,'⚠').trim();
 }
 
-/* ════════════════════════════════
-   APPLY INPUT
-════════════════════════════════ */
+/* ═══════════════════════════
+   APPLY INPUT — 파싱 후 자동 DB 업로드
+═══════════════════════════ */
 async function applyInput() {
   const raw = document.getElementById('txtInput').value.trim();
   if (!raw) { toast('텍스트를 붙여넣으세요'); return; }
 
   D = parseInv(raw);
-  localStorage.setItem('inv_data', JSON.stringify(D));
   closeInput();
   renderAll();
 
-  const summary = JSON.stringify({
-    total:   D.account?.['총평가'] || '',
-    ret:     D.account?.['수익률 (누적)'] || '',
-    cash:    D.account?.['USD 현금'] || '',
-    orders:  D.orders?.length || 0,
-    concl:   D.conclusion || ''
-  });
+  toast('☁️ DB 저장 중...');
+  const result = await syncToDb();
+  toast(result?.ok ? '✅ DB 저장 완료' : '⚠️ 저장 실패 — DB 연결을 확인하세요');
 
-  toast('☁️ 저장 중...');
-  await apiPost({
-    action:       'upsert',
-    id:           D.dateId,
-    display_date: D.displayDate,
-    summary_json: summary,
-    full_json:    JSON.stringify(D),
-    raw_text:     encodeURIComponent(raw)
-  });
-
-  // Apps Script 처리 대기 후 목록 갱신
-  await wait(1500);
-  dot('saved');
-  toast('✅ DB 저장 완료');
-  const res = await apiGet({action:'list'});
+  const res = await apiGet({ action: 'list' });
   if (res?.ok) HIST = res.data;
   checkToday();
-  setTimeout(() => dot('idle'), 3000);
 }
 
-async function manualSync() {
-  if (!D) { toast('데이터 없음'); return; }
-  const raw = document.getElementById('txtInput').value.trim();
-  if (!raw) { toast('원문 없음 — 먼저 업데이트 하세요'); return; }
-  toast('☁️ 수동 동기화 중...');
-  await apiPost({
-    action:'upsert', id:D.dateId, display_date:D.displayDate,
-    summary_json: JSON.stringify({total:D.account?.['총평가']||'',ret:D.account?.['수익률 (누적)']||''}),
-    full_json: JSON.stringify(D), raw_text: encodeURIComponent(raw)
-  });
-  await wait(1500);
-  dot('saved');
-  toast('✅ 동기화 완료');
-  setTimeout(() => dot('idle'), 3000);
-}
-
-/* ════════════════════════════════
+/* ═══════════════════════════
    HISTORY
-════════════════════════════════ */
+═══════════════════════════ */
 function openHistory() {
   renderHistList();
   document.getElementById('ovHist').classList.add('on');
@@ -589,18 +550,22 @@ function closeHistory() { document.getElementById('ovHist').classList.remove('on
 
 async function loadHistoryList() {
   document.getElementById('histList').innerHTML = '<div class="loading"><div class="spinner"></div>불러오는 중...</div>';
-  const res = await apiGet({action:'list'});
+  const res = await apiGet({ action: 'list' });
   if (res?.ok) HIST = res.data;
   renderHistList();
 }
 
 function renderHistList() {
   const el = document.getElementById('histList');
-  if (!HIST.length) { el.innerHTML = '<div style="text-align:center;padding:30px;color:var(--sub-lt);font-size:13px">저장된 히스토리 없음</div>'; return; }
+  if (!HIST.length) {
+    el.innerHTML = '<div style="text-align:center;padding:30px;color:var(--sub-lt);font-size:13px">저장된 히스토리 없음</div>';
+    return;
+  }
   const tid = todayId();
   el.innerHTML = HIST.map(h => {
     let s = {}; try { s = JSON.parse(h.summary_json); } catch(e) {}
-    const ret = s.ret || ''; const retN = parseFloat(ret);
+    const ret = s.ret || '';
+    const retN = parseFloat(ret);
     const retCol = retN > 0 ? 'var(--buy)' : retN < 0 ? 'var(--stop)' : 'var(--sub)';
     const isT = h.id === tid;
     return `<div class="hi" onclick="selectRecord('${h.id}')">
@@ -626,39 +591,43 @@ async function selectRecord(id) {
 
 async function loadRecord(id, showMsg) {
   if (showMsg) toast('불러오는 중...');
-  const res = await apiGet({action:'read', id});
-  if (!res?.ok || !res.data) { if(showMsg) toast('불러오기 실패'); return; }
+  const res = await apiGet({ action: 'read', id });
+  if (!res?.ok || !res.data) { if (showMsg) toast('불러오기 실패'); return; }
   try {
     D = JSON.parse(res.data.full_json);
-    // restore raw to textarea for re-parsing
-    try { document.getElementById('txtInput').value = decodeURIComponent(res.data.raw_text||''); } catch(e){}
-    localStorage.setItem('inv_data', JSON.stringify(D));
+    try {
+      document.getElementById('txtInput').value = decodeURIComponent(res.data.raw_text || '');
+    } catch(e) {}
     renderAll();
     if (showMsg) toast(`✅ ${id} 복원됨`);
-  } catch(e) { if(showMsg) toast('데이터 오류'); }
+  } catch(e) { if (showMsg) toast('데이터 오류'); }
 }
 
 async function deleteRecord(id) {
   if (!confirm(`[${id}] 기록을 삭제할까요?`)) return;
   toast('🗑 삭제 중...');
-  await apiPost({action:'delete', id});
-  await wait(1500);
-  dot('saved');
-  // 목록 갱신
-  const res = await apiGet({action:'list'});
+  dot('saving');
+  const result = await apiPost({ action: 'delete', id });
+  if (result?.ok) {
+    dot('saved');
+    toast('🗑 삭제됨');
+    setTimeout(() => dot('idle'), 3000);
+  } else {
+    dot('idle');
+    toast('⚠️ 삭제 실패');
+  }
+  const res = await apiGet({ action: 'list' });
   if (res?.ok) HIST = res.data;
   renderHistList();
-  toast('🗑 삭제됨');
-  if (D?.dateId === id) { D = null; localStorage.removeItem('inv_data'); renderAll(); }
+  if (D?.dateId === id) { D = null; renderAll(); }
   checkToday();
-  setTimeout(() => dot('idle'), 3000);
 }
 
-/* ════════════════════════════════
+/* ═══════════════════════════
    RENDER
-════════════════════════════════ */
+═══════════════════════════ */
 function renderAll() {
-  if (!D) { ['p0','p1','p2','p3'].forEach(id => { document.getElementById(id).innerHTML = emptyHtml('anchor','데이터 없음','업데이트 버튼을 눌러<br>브리핑 텍스트를 붙여넣으세요'); }); setMeta('데이터 없음'); return; }
+  if (!D) { renderEmpty(); setMeta('데이터 없음'); return; }
   renderHeader();
   rP0(); rP1(); rP2(); rP3();
 }
@@ -676,9 +645,9 @@ function renderHeader() {
     document.getElementById('hdrSub').textContent = D.displayDate || '';
     const retEl = document.getElementById('hdrRet');
     retEl.textContent = ret.split('(')[0].trim();
-    if (retN > 0) { retEl.style.cssText = 'background:rgba(134,239,172,.15);border-color:rgba(134,239,172,.35);color:#86efac'; }
-    else if (retN < 0) { retEl.style.cssText = 'background:rgba(252,165,165,.15);border-color:rgba(252,165,165,.35);color:#fca5a5'; }
-    else { retEl.style.cssText = 'background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.2);color:rgba(255,255,255,.6)'; }
+    if (retN > 0)      retEl.style.cssText = 'background:rgba(134,239,172,.15);border-color:rgba(134,239,172,.35);color:#86efac';
+    else if (retN < 0) retEl.style.cssText = 'background:rgba(252,165,165,.15);border-color:rgba(252,165,165,.35);color:#fca5a5';
+    else               retEl.style.cssText = 'background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.2);color:rgba(255,255,255,.6)';
   } else {
     meta.style.display = 'block';
     kpi.classList.remove('on');
@@ -692,30 +661,30 @@ function setMeta(t) {
   document.getElementById('hdrKpi').classList.remove('on');
 }
 
-/* ── P0: 오늘 할 일 ── */
+/* P0: 오늘 할 일 */
 function rP0() {
   let h = '';
   if (D.conclusion) {
     h += `<div class="concl"><div class="concl-lbl">⚓ 오늘의 항로</div><div class="concl-txt">${D.conclusion}</div>${D.confidence?`<div class="concl-badge"><span class="ms" style="font-size:12px">verified</span>${D.confidence}</div>`:''}</div>`;
   }
-  const t0 = (D.ddays||[]).filter(x=>/D-0/.test(x['D-Day']||''));
-  const t1 = (D.ddays||[]).filter(x=>/D-1(?!\d)/.test(x['D-Day']||''));
-  if (t0.length||t1.length) {
+  const t0 = (D.ddays||[]).filter(x => /D-0/.test(x['D-Day']||''));
+  const t1 = (D.ddays||[]).filter(x => /D-1(?!\d)/.test(x['D-Day']||''));
+  if (t0.length || t1.length) {
     h += `<div class="sl">⚡ 오늘 이벤트</div>`;
-    t0.forEach(e => h += evtCard(e,'today','TODAY'));
-    t1.forEach(e => h += evtCard(e,'near','내일'));
+    t0.forEach(e => h += evtCard(e, 'today', 'TODAY'));
+    t1.forEach(e => h += evtCard(e, 'near', '내일'));
   }
   if (D.orders?.length) {
-    const buys  = D.orders.filter(o=>/매수/.test(o['주문']||''));
-    const sells = D.orders.filter(o=>/매도/.test(o['주문']||''));
-    const stops = D.orders.filter(o=>/stop/i.test(o['주문']||''));
+    const buys  = D.orders.filter(o => /매수/.test(o['주문']||''));
+    const sells = D.orders.filter(o => /매도/.test(o['주문']||''));
+    const stops = D.orders.filter(o => /stop/i.test(o['주문']||''));
     h += `<div class="sl">📋 주문 ${D.orders.length}건</div>`;
-    if (buys.length)  h += `<div class="og buy"><span class="ms">trending_up</span>매수 ${buys.length}건</div>`  + buys.map(o=>ocCard(o,'buy')).join('');
-    if (sells.length) h += `<div class="og sell" style="margin-top:6px"><span class="ms">trending_down</span>매도 ${sells.length}건</div>` + sells.map(o=>ocCard(o,'sell')).join('');
-    if (stops.length) h += `<div class="og stop" style="margin-top:6px"><span class="ms">block</span>STOP ${stops.length}건</div>` + stops.map(o=>ocCard(o,'stop')).join('');
+    if (buys.length)  h += `<div class="og buy"><span class="ms">trending_up</span>매수 ${buys.length}건</div>`  + buys.map(o => ocCard(o, 'buy')).join('');
+    if (sells.length) h += `<div class="og sell" style="margin-top:6px"><span class="ms">trending_down</span>매도 ${sells.length}건</div>` + sells.map(o => ocCard(o, 'sell')).join('');
+    if (stops.length) h += `<div class="og stop" style="margin-top:6px"><span class="ms">block</span>STOP ${stops.length}건</div>` + stops.map(o => ocCard(o, 'stop')).join('');
   }
   if (D.bfinWarn) h += `<div class="bwarn"><div class="bwarn-lbl">⚠ 행동재무 경고</div><div class="bwarn-txt">${D.bfinWarn}</div></div>`;
-  if (!h) h = emptyHtml('checklist','오늘 할 일 없음','업데이트 버튼을 눌러 브리핑을 입력하세요');
+  if (!h) h = emptyHtml('checklist', '오늘 할 일 없음', '업데이트 버튼을 눌러 브리핑을 입력하세요');
   document.getElementById('p0').innerHTML = h;
 }
 
@@ -723,18 +692,18 @@ function evtCard(e, cls, tag) {
   return `<div class="evt ${cls}"><span class="evt-tag">${tag}</span><div><div class="evt-time">${e['일시 (KST)']||''}</div><div class="evt-name">${e['이벤트']||''}</div></div></div>`;
 }
 function ocCard(o, cls) {
-  const ic = {buy:'trending_up',sell:'trending_down',stop:'block'};
+  const ic = { buy:'trending_up', sell:'trending_down', stop:'block' };
   return `<div class="oc ${cls}"><span class="ms">${ic[cls]}</span><div class="oc-mid"><div class="oc-ticker">${o['종목']||''}</div><div class="oc-intent">${o['의도']||o['주문']||''}</div></div><div><div class="oc-price">${o['가격']||''}</div><div class="oc-qty">${o['수량']||''}</div></div></div>`;
 }
 
-/* ── P1: 현황 ── */
+/* P1: 현황 */
 function rP1() {
   let h = '';
   if (D.holdings?.length) {
     h += `<div class="sl">보유 종목</div><div class="hgrid">`;
     D.holdings.forEach(hd => {
       const ticker = hd['종목']||'';
-      const chg = (D.changes||[]).find(c=>(c['항목']||'').includes(ticker))?.['변화']||'';
+      const chg = (D.changes||[]).find(c => (c['항목']||'').includes(ticker))?.['변화']||'';
       const ret = hd['수익률']||''; const retN = parseFloat(ret);
       const cls = retN>0?'pos':retN<0?'neg':'neu';
       const pnl = hd['평가손익(USD)']||'';
@@ -760,14 +729,14 @@ function rP1() {
     const usdSub  = usd.match(/\(([^)]+)\)/)?.[1]||'';
     h += `<div class="usd-card"><div><div class="usd-lbl">USD CASH</div><div class="usd-val">${usdMain}</div><div class="usd-krw">${usdSub}</div></div><div class="usd-r">환차손익<br>${fxpnl||'—'}</div></div>`;
   }
-  if (!h) h = emptyHtml('bar_chart','현황 없음','업데이트 버튼을 눌러 브리핑을 입력하세요');
+  if (!h) h = emptyHtml('bar_chart', '현황 없음', '업데이트 버튼을 눌러 브리핑을 입력하세요');
   document.getElementById('p1').innerHTML = h;
 }
 
-/* ── P2: 계기반 ── */
+/* P2: 계기반 */
 function rP2() {
   let h = '';
-  const kpis=[{l:'총 평가액',k:'총평가'},{l:'누적 수익률',k:'수익률 (누적)'},{l:'매매 손익',k:'매매손익'},{l:'환차 손익',k:'환차손익'}];
+  const kpis = [{l:'총 평가액',k:'총평가'},{l:'누적 수익률',k:'수익률 (누적)'},{l:'매매 손익',k:'매매손익'},{l:'환차 손익',k:'환차손익'}];
   h += `<div class="sl">계좌 현황</div><div class="kgrid">`;
   kpis.forEach(({l,k}) => {
     const v = D.account?.[k]||'—';
@@ -778,7 +747,7 @@ function rP2() {
   if (D.technicals?.length) {
     h += `<div class="sl" style="margin-top:16px">기술 지표 · RSI</div>`;
     D.technicals.forEach(t => {
-      const ticker = t['종목']||''; if(!ticker||ticker==='종목') return;
+      const ticker = t['종목']||''; if (!ticker||ticker==='종목') return;
       const rN = rsiN(t['RSI']||'50'); const rC = rsiC(rN);
       const R = 17; const C2 = 2*Math.PI*R;
       const fill = C2*(rN/100);
@@ -807,11 +776,10 @@ function rP2() {
     });
     h += `</div>`;
   }
-  if (!h) h = emptyHtml('speed','계기반 없음','업데이트 버튼을 눌러 브리핑을 입력하세요');
-  document.getElementById('p2').innerHTML = h;
+  document.getElementById('p2').innerHTML = h || emptyHtml('speed', '계기반 없음', '업데이트 버튼을 눌러 브리핑을 입력하세요');
 }
 
-/* ── P3: 항로 ── */
+/* P3: 항로 */
 function rP3() {
   let h = '';
   if (D.ddays?.length) {
@@ -829,7 +797,7 @@ function rP3() {
       h += `<div class="rcard ${cls}"><div class="r-scen">${r['시나리오']||''}</div>${r['트리거']?`<div class="r-trig">트리거: ${r['트리거']}</div>`:''} ${r['대응']?`<div class="r-act">${r['대응']}</div>`:''}</div>`;
     });
   }
-  const cands = (D.candidates||[]).filter(c=>c['후보']&&c['후보']!=='후보');
+  const cands = (D.candidates||[]).filter(c => c['후보'] && c['후보']!=='후보');
   if (cands.length) {
     h += `<div class="sl" style="margin-top:16px">종목 교체 후보</div>`;
     cands.forEach(c => { h += `<div class="ccard"><div class="c-top"><span class="c-ticker">${c['후보']||''}</span>${c['진입가']?`<span class="c-entry">${c['진입가']}</span>`:''}</div>${c['진입 시점']?`<div style="font-size:10px;color:var(--sub);margin-top:2px">${c['진입 시점']}</div>`:''} ${c['근거']?`<div class="c-reason">${c['근거']}</div>`:''}</div>`; });
@@ -842,16 +810,16 @@ function rP3() {
     D.sectors.forEach(s => { h += `<div class="card">${s}</div>`; });
   }
   document.getElementById('p3').innerHTML = h;
-  setTimeout(() => { const f=document.getElementById('taxFill'); if(f) f.style.width=pct+'%'; }, 50);
+  setTimeout(() => { const f = document.getElementById('taxFill'); if (f) f.style.width = pct+'%'; }, 50);
 }
 
-/* ════════════════════════════════
+/* ═══════════════════════════
    UI
-════════════════════════════════ */
+═══════════════════════════ */
 function setTab(i) {
   curTab = i;
-  document.querySelectorAll('.pane').forEach((el,j)=>el.classList.toggle('on',i===j));
-  document.querySelectorAll('.tab').forEach((el,j)=>el.classList.toggle('on',i===j));
+  document.querySelectorAll('.pane').forEach((el,j) => el.classList.toggle('on', i===j));
+  document.querySelectorAll('.tab').forEach((el,j) => el.classList.toggle('on', i===j));
   document.getElementById('content').scrollTop = 0;
 }
 
@@ -864,8 +832,6 @@ function rsiC(v) { return v>=75?'#dc2626':v>=60?'#d97706':v>=45?'#16a34a':'#2563
 function emptyHtml(icon, t, s) {
   return `<div class="empty"><span class="ms">${icon}</span><div class="empty-t">${t}</div><div class="empty-s">${s}</div></div>`;
 }
-
-function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
 
 let _tt = null;
 function toast(msg) {
